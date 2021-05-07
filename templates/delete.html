@@ -1,0 +1,119 @@
+{% extends 'base.html' %} {% block content %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MarioShare</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{% url 'public' %}"
+            >ホーム</a
+          >
+        </li>
+        <li class="nav-item active">
+          <a
+            class="nav-link"
+            aria-current="page"
+            href="{% url 'mypage' user.pk %}"
+            >マイページ</a
+          >
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{% url 'logout'%}"
+            >ログアウト</a
+          >
+        </li>
+      </ul>
+      <a class="nav-link" aria-current="page" href="{% url 'mypage' user.pk %}"
+        >{{ user.get_username }}</a
+      >
+    </div>
+  </div>
+</nav>
+
+{% if user.is_authenticated %}
+<container>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+      <div class="text-center">
+      <h3 class="white-text mb-5 mt-4 font-weight-bold text-uppercase">
+        <strong
+          ><font color="black"
+            >Are you sure to delete your shared course?</font
+          ></strong
+        >
+      </h3>
+        <button type="submit" class="btn btn-sm btn-outline-danger">
+          削除
+        </button>
+    </div>
+  </div>
+  </form>
+</container>
+{% else %}
+<p>please login</p>
+<a href="{% url 'login' %}">ログインする</a>
+{% endif %} {% endblock content %} {% block footer %}
+<!-- Footer -->
+<footer class="bg-dark text-center text-white">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!-- Section: Social media -->
+    <section class="mb-3">
+      <!-- Facebook -->
+      <a
+        class="btn btn-outline-light btn-floating m-1"
+        href="https://www.youtube.com/channel/UCCuV7uVtUb6p5bglcK2bN0w"
+        role="button"
+        ><i class="fab fa-youtube"></i>
+      </a>
+
+      <!-- Twitter -->
+      <a
+        class="btn btn-outline-light btn-floating m-1"
+        href="https://twitter.com/juvenile_1225"
+        role="button"
+        ><i class="fab fa-twitter"></i
+      ></a>
+
+      <!-- Github -->
+      <a
+        class="btn btn-outline-light btn-floating m-1"
+        href="https://github.com/Shin-sibainu"
+        role="button"
+        ><i class="fab fa-github"></i
+      ></a>
+    </section>
+    <!-- Section: Form -->
+
+    <!-- Section: Text -->
+    <section class="mb-1">
+      <p>
+        This site is created by Juvenile. Something happend, please contact my
+        twitter. Let's Enjoy MarioMaker2 Life!
+      </p>
+    </section>
+  </div>
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    © 2021 Copyright:
+    <a class="text-white" href="https://twitter.com/juvenile_1225"
+      >MarioShare.com</a
+    >
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+{% endblock footer %}

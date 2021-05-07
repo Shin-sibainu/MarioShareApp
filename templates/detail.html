@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% load embed_video_tags %}
+
+{% block customcss %}
+<link href="{% static 'detail.css' %}" rel="stylesheet" />
+{% endblock customcss %} 
+{% block content %}
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">MarioShare</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="{% url 'public' %}"
+              >ホーム</a
+            >
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="{% url 'mypage' user.pk%}"
+              >マイページ</a
+            >
+          </li>
+          <li class="nav-item active">
+            <a
+              class="nav-link"
+              aria-current="page"
+              href="{% url 'share' %}"
+              >コース共有</a
+            >
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="{% url 'logout' %}"
+              >ログアウト</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="starter-template text-center mb-4">
+      <h1>Title: {{object.coursetitle}}</h1>
+      <p class="lead">Maker: {{object.coursemaker}}</p>
+      <p class="lead"><strong>ID: {{object.courseid}}</strong></p>
+      {% video object.coursevideo as video %}
+      {% video video '768x432' %}
+      {% endvideo %}
+      <!-- Or embed shortcut: -->
+      
+      <p>{{object.comment}}</p>
+      <a
+        href="{% url 'good' object.pk %}"
+        type="button"
+        class="btn btn-outline-danger"
+        >いいねする</a
+      >
+      <a href="#" type="button" class="btn btn-outline-info">
+        Twitterでシェア
+      </a>
+    </div>
+
+  </main>
+  <!-- /.container -->
+
+  <script
+    src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"
+  ></script>
+</body>
+{% endblock content %}
+
+{% block footer %}
+<!-- Footer -->
+<footer class="bg-dark text-center text-white">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!-- Section: Social media -->
+    <section class="mb-3">
+      <!-- Facebook -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.youtube.com/channel/UCCuV7uVtUb6p5bglcK2bN0w" role="button"
+        ><i class="fab fa-youtube"></i>
+      </a>
+
+      <!-- Twitter -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/juvenile_1225" role="button"
+        ><i class="fab fa-twitter"></i
+      ></a>
+
+      <!-- Github -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Shin-sibainu" role="button"
+        ><i class="fab fa-github"></i
+      ></a>
+    </section>
+    <!-- Section: Form -->
+
+    <!-- Section: Text -->
+    <section class="mb-1">
+      <p>
+        This site is created by Juvenile. Something happend, please contact my twitter.
+        Let's Enjoy MarioMaker2 Life!   
+      </p>
+    </section>
+      </div>
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright:
+    <a class="text-white" href="https://twitter.com/juvenile_1225">MarioShare.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+{% endblock footer %}

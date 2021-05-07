@@ -1,0 +1,68 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block customcss %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+{% endblock customcss %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MarioShare</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{% url 'public' %}"
+            >ホーム</a
+          >
+        </li>
+      </ul>  
+    </div>
+  </div>
+</nav>
+
+<body class="text-center">
+  <main class="form-signin">
+    {{error}}
+    <form  method="POST">{% csrf_token %}
+      <h1 class="h3 mb-3 fw-normal">サインインする</h1>
+      <label for="inputEmail" class="visually-hidden">ユーザー名</label>
+      <input
+        type="text"
+        id="inputEmail"
+        class="form-control"
+        placeholder="ユーザー名"
+        name='username'
+        required
+        autofocus
+      />
+      <label for="inputPassword" class="visually-hidden">パスワード</label>
+      <input
+        type="password"
+        id="inputPassword"
+        class="form-control"
+        placeholder="パスワード"
+        name='password'
+        required
+      />
+      <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">
+        サインイン
+      </button>
+        <a href="{% url 'login' %}">すでにアカウントのお持ちの方</a>
+    </form>
+  </main>
+</body>
+{% endblock content %}

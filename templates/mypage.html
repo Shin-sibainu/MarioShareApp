@@ -1,0 +1,228 @@
+{% extends 'base.html' %} {% load static %} 
+
+
+{% block customcss %}
+<link href="{% static 'mypage.css' %}" rel="stylesheet" />
+{% endblock customcss %} {% block content %} 
+{% if user.is_authenticated %}
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">Page Creater</h4>
+          <p class="text-muted">Juvenile(じゅぶ)</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Contact</h4>
+          <ul class="list-unstyled">
+            <li>
+              <a href="https://twitter.com/juvenile_1225" class="text-white"
+                >Twitterをフォローする</a
+              >
+            </li>
+            <li><a href="#" class="text-white">Instagramをフォローする</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-light shadow-sm" style="background-color: black">
+    <div class="container">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <span style="color: white">MarioShare</span>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarHeader"
+        aria-controls="navbarHeader"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MarioShare</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{% url 'public' %}"
+            >ホーム</a
+          >
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{% url 'mypage' user.pk %}"
+            >マイページ</a
+          >
+        </li>
+        <li class="nav-item active">
+          <a
+            class="nav-link"
+            aria-current="page"
+            href="{% url 'share' %}"
+            >コース共有</a
+          >
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{% url 'logout'%}"
+            >ログアウト</a
+          >
+        </li>
+      </ul>
+        <a class="nav-link" aria-current="page" href="{% url 'mypage' user.pk %}"
+          >{{ user.get_username }}</a
+        >
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">MyPage</h1>
+        <p class="lead text-muted">
+          <span class="leadtext">とっておきの素晴らしいコースを共有しよう</span>
+        </p>
+        <p>
+          <a href="{% url 'public' %}" class="btn btn-primary my-2"
+            >ホームに戻る</a
+          >
+          <a href="{% url 'share' %}" class="btn btn-secondary my-2"
+            >コースを共有</a
+          >
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for item in object_list %}
+      {% if user.get_username == item.contributer %}
+      <div class="col">
+        <div class="card shadow-sm">
+          <center class="thumnail_center">
+            <img src="{{item.courseimage.url}}" width="384" height="216" />
+          </center>
+          <div class="card-body">
+            <p class="card-text">{{item.coursetitle}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url 'detail' item.pk %}" class="card__link">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-outline-primary"
+                  >
+                    見る
+                  </button>
+                </a>
+                <a href="{% url 'update' item.pk %}" class="card__link">
+                <button type="button" class="btn btn-sm btn-outline-success">
+                  編集
+                </button>
+                </a>
+                <a href="{% url 'delete' item.pk %}" class="card__link">
+                  <button type="button" class="btn btn-sm btn-outline-danger">
+                    削除
+                  </button>
+                </a>
+                <div style="color: red; margin-left:9px; margin-top:3px;">❤️ {{item.good}}</div>
+              </div>
+              ID: {{item.courseid}}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    <nav aria-label="Page navigation example" class="mt-4">
+      <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+          <!-- <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">&laquo; first</a>-->
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">&laquo; previous</a>
+          {% endif %} 
+        
+          {% for page_number in page_obj.page_number %}
+            <p>a</p>
+          <li class="page-item"><a class="page-link" href="{{page_object.number}}">{{page_number.number}}</a></li>
+          {% endfor %}
+        
+          {% if page_obj.has_next %}
+          <!--<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>-->
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</div>
+{% else %}
+<p>please login</p>
+<a href="{% url 'login' %}">ログインする</a>
+{% endif %} 
+{% endblock content %}
+
+{% block footer %}
+<!-- Footer -->
+<footer class="bg-dark text-center text-white">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!-- Section: Social media -->
+    <section class="mb-3">
+      <!-- Facebook -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.youtube.com/channel/UCCuV7uVtUb6p5bglcK2bN0w" role="button"
+        ><i class="fab fa-youtube"></i>
+      </a>
+
+      <!-- Twitter -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/juvenile_1225" role="button"
+        ><i class="fab fa-twitter"></i
+      ></a>
+
+      <!-- Github -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Shin-sibainu" role="button"
+        ><i class="fab fa-github"></i
+      ></a>
+    </section>
+    <!-- Section: Form -->
+
+    <!-- Section: Text -->
+    <section class="mb-1">
+      <p>
+        This site is created by Juvenile. Something happend, please contact my twitter.
+        Let's Enjoy MarioMaker2 Life!   
+      </p>
+    </section>
+      </div>
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright:
+    <a class="text-white" href="https://twitter.com/juvenile_1225">MarioShare.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+{% endblock footer %}
