@@ -61,8 +61,8 @@
       {% video video '768x432' %}
       {% endvideo %}
       <!-- Or embed shortcut: -->
-      
       <p>{{object.comment}}</p>
+      <p>Category: {{object.coursecategory}}</p>
       <a
         href="{% url 'good' object.pk %}"
         type="button"

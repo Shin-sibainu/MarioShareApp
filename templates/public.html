@@ -1,8 +1,6 @@
 {% extends 'base.html' %} {% load static %} {% block customcss %}
 <link href="{% static 'public.css' %}" rel="stylesheet" />
-{% endblock customcss %} 
-
-{% block content %}
+{% endblock customcss %} {% block content %}
 <header>
   <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
@@ -112,9 +110,48 @@
     </div>
   </section>
 </main>
-
+<!----------------------------------->
+<!------------------------------------>
 <div class="album py-5 bg-light">
   <div class="container">
+    <label for="form103"><font color="black">Category</font></label>
+    <select
+      onChange="location.href=value"
+      type="text"
+      name="coursecategory"
+      style="width: 30%;"
+      id="form105"
+      class="md-textarea form-control mb-3"
+    >
+      <option value="" selected>------------</option>
+      {% for category in category_list %}
+      <option value="./category/{{category}}" name="coursecategory">
+        {{category.name}}
+      </option>
+      {% endfor %}
+    </select>
+<!--------------------------------------------->
+<!--------------------------------------------->
+<!--
+    <label for="form104"><font color="black">Sort</font></label>
+    <select
+      onChange="location.href=value"
+      type="text"
+      name="coursecategory"
+      style="width: 50%;"
+      id="form106"
+      class="md-textarea form-control mb-2"
+    >
+      <option value="" selected>------------</option>
+      {% for sort in sort_list %}
+      <option value="./sort={{sort}}">
+        {{sort.name}}
+      </option>
+      {% endfor %}
+    </select>
+    -->
+<!------------------------------------------->
+<!------------------------------------------->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       {% for item in page_obj %}
       <div class="col">
@@ -131,7 +168,9 @@
                     見る
                   </button>
                 </a>
-                <div style="color: red; margin-left:9px; margin-top:3px;">❤️ {{item.good}}</div>
+                <div style="color: red; margin-left: 9px; margin-top: 3px">
+                  ❤️ {{item.good}}
+                </div>
               </div>
               ID: {{item.courseid}}
             </div>
@@ -140,48 +179,35 @@
       </div>
       {% endfor %}
     </div>
-    <!--
-    <div class="pagination">
-      <span class="step-links">
-          {% if page_obj.has_previous %}
-              <a href="?page=1">&laquo; first</a>
-              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-          {% endif %}
-    
-          <span class="current">
-              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-          </span>
-    
-          {% if page_obj.has_next %}
-              <a href="?page={{ page_obj.next_page_number }}">next</a>
-              <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-          {% endif %}
-      </span>
-    </div>
-  -->
-
     <nav aria-label="Page navigation example" class="mt-4">
       <ul class="pagination justify-content-center">
-          {% if page_obj.has_previous %}
-          <!-- <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">&laquo; first</a>-->
-          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">&laquo; previous</a>
-          {% endif %} 
-        
-          {% for page_number in page_obj.page_number %}
-            <p>a</p>
-          <li class="page-item"><a class="page-link" href="{{page_object.number}}">{{page_number.number}}</a></li>
-          {% endfor %}
-        
-          {% if page_obj.has_next %}
-          <!--<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>-->
-          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+        {% if page_obj.has_previous %}
+        <!-- <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">&laquo; first</a>-->
+        <a
+          class="page-link"
+          href="?page={{ page_obj.previous_page_number }}"
+          tabindex="-1"
+          aria-disabled="true"
+          >&laquo; previous</a
+        >
+        {% endif %} {% for page_number in page_obj.page_number %}
+        <p>a</p>
+        <li class="page-item">
+          <a class="page-link" href="{{page_object.number}}"
+            >{{page_number.number}}</a
+          >
+        </li>
+        {% endfor %} {% if page_obj.has_next %}
+        <!--<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>-->
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+          >Next &raquo;</a
+        >
         {% endif %}
       </ul>
     </nav>
   </div>
 </div>
 {% endblock content %} 
-
 
 {% block footer %}
 <!-- Footer -->
