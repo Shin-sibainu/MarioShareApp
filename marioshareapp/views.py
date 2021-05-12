@@ -14,6 +14,8 @@ def landingfunc(request):
     return render(request, 'landing.html', {})
 
 # サインアップ機能を実装
+
+
 def signupfunc(request):
     if(request.method == 'POST'):
         username = request.POST['username']
@@ -39,6 +41,7 @@ def loginfunc(request):
             return render(request, 'login.html', {'error': 'そのユーザーは存在しません。'})
     return render(request, 'login.html', {})
 
+
 def logoutfunc(request):
     logout(request)
     return redirect('login')
@@ -50,28 +53,28 @@ def publicfunc(request):
     # 逆順で取得したデータを6つまで取得。
     paginator = Paginator(object_list, 6)
     page_number = request.GET.get('page')
+    print(page_number)
     page_obj = paginator.get_page(page_number)
+
     context = {
-        'page_obj': page_obj
+        'page_obj': page_obj,
     }
     return render(request, 'public.html', context)
 
-def mypagefunc(request, user_id):
+def mypagefunc(request, user_name):
     object_list = MarioShareModel.objects.all().order_by("-post_date")
     paginator = Paginator(object_list, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    # Userオブジェクトはイテラブルじゃないよ！ってエラー吐かれてる。
-    # ユーザーオブジェクトをfor文で出しても意味がない。
-    # user = get_object_or_404(User, pk=user_id)
-    # contributerと現在ログインしているUserが同じであれば、そのUserが投稿したデータをリストで取得する
-    # print(MarioShareModel.objects.values_list('contributer', flat=True))
-    # object_list = request.user
     context = {
         'object_list': object_list,
-        'page_obj': page_obj
+        'page_obj': page_obj,
     }
     return render(request, 'mypage.html', context)
+
+def mypagecategory(request, user_name, category):
+    the_object_list = MarioShareModel.objects.all()
+    return render(request, 'mypagecategory.html', {'the_object_list': the_object_list, 'category_name':category})
 
 def detailfunc(request, pk):
     object = get_object_or_404(MarioShareModel, pk=pk)
@@ -82,18 +85,6 @@ def goodfunc(request, pk):
     # 後でいいねできる数を制限しておきたい。
     object.good += 1
     object.save()
-
-    #public_page = resolve_url('public')
-    #referer_page = request.META.get('HTTP_REFERER') 
-    #print(referer_page)
-    #if referer_page:
-    #    parse_result = parse.urlparse(referer_page)
-    #    print(parse_result.netloc)
-    #    print(request.get_host())
-    #    print(referer_page)
-    #    if request.get_host() == parse_result.path:
-    #        return redirect(referer_page)
-    #return redirect(referer_page)
     return redirect('public')
 
 class shareview(CreateView):
@@ -103,11 +94,6 @@ class shareview(CreateView):
     def get_success_url(self):
         return reverse('public')
 
-#def share_category(request):
-#    category_list = CourseCategory.objects.all()
-#    print("a")
-#    print(category_list)
-#    return render(request, 'public.html', {'category_list':category_list})
 
 class postdeleteview(DeleteView):
     template_name = 'delete.html'
@@ -124,11 +110,11 @@ class updateview(UpdateView):
 
 def category(request, category):
     the_object_list = MarioShareModel.objects.all()
-    #print(the_object_list)
-    #for the_category in the_object_list:
+    # print(the_object_list)
+    # for the_category in the_object_list:
     #    print(the_category.coursecategory.name)
-    #mariosharemodel = MarioShareModel.objects.filter(coursecategory=category)
-    #return render(request, 'public.html', {'category': category, 'mariosharemodel': mariosharemodel})
+    # mariosharemodel = MarioShareModel.objects.filter(coursecategory=category)
+    # return render(request, 'public.html', {'category': category, 'mariosharemodel': mariosharemodel})
     return render(request, 'category.html', {'the_object_list': the_object_list, 'category_name':category})
 
 def sortfunc(request, sort):
@@ -139,8 +125,9 @@ def sortfunc(request, sort):
     context ={
         'good_sort_list':good_sort_list,
         'new_sort_list':new_sort_list,
-        #'sort_name':sort,
+        # 'sort_name':sort,
      }
     return render(request, 'sort.html', context)
 
+#def likepage(request):
 

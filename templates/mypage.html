@@ -115,7 +115,6 @@
 
 <div class="album py-3 bg-light">
   <div class="container">
-    <!--
     <label for="form103"><font color="black">Category</font></label>
     <select
       onChange="location.href=value"
@@ -132,9 +131,10 @@
       </option>
       {% endfor %}
     </select>
-  -->
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      {% for item in page_obj %} {% if user.get_username == item.contributer %}
+      {% for item in page_obj %} 
+      {% if user.get_username == item.contributer %}
       <div class="col">
         <div class="card shadow-sm">
           <center class="thumnail_center">
@@ -168,7 +168,8 @@
           </div>
         </div>
       </div>
-      {% endif %} {% endfor %}
+      {% endif %} 
+      {% endfor %}
     </div>
 
     <nav aria-label="Page navigation example" class="mt-4">

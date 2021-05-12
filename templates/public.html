@@ -69,7 +69,7 @@
           <a
             class="nav-link"
             aria-current="page"
-            href="{% url 'mypage' user.pk %}"
+            href="{% url 'mypage' user.get_username %}"
             >マイページ</a
           >
         </li>
@@ -84,7 +84,7 @@
           >
         </li>
       </ul>
-      <a class="nav-link" aria-current="page" href="{% url 'mypage' user.pk %}"
+      <a class="nav-link" aria-current="page" href="{% url 'mypage' user.get_username %}"
         >{{ user.get_username }}</a
       >
     </div>
@@ -102,7 +102,7 @@
           >
         </p>
         <p>
-          <a href="{% url 'mypage' user.pk %}" class="btn btn-primary my-2"
+          <a href="{% url 'mypage' user.get_username %}" class="btn btn-primary my-2"
             >マイページへ</a
           >
         </p>
@@ -112,7 +112,7 @@
 </main>
 <!----------------------------------->
 <!------------------------------------>
-<div class="album py-5 bg-light">
+<div class="album py-3 bg-light">
   <div class="container">
     <label for="form103"><font color="black">Category</font></label>
     <select
@@ -125,20 +125,20 @@
     >
       <option value="" selected>------------</option>
       {% for category in category_list %}
-      <option value="./category/{{category}}" name="coursecategory">
+      <option value="category/{{category}}" name="coursecategory">
         {{category.name}}
       </option>
       {% endfor %}
     </select>
 <!--------------------------------------------->
 <!--------------------------------------------->
-<!--
+<!--   
     <label for="form104"><font color="black">Sort</font></label>
     <select
       onChange="location.href=value"
       type="text"
       name="coursecategory"
-      style="width: 50%;"
+      style="width: 30%;"
       id="form106"
       class="md-textarea form-control mb-2"
     >
@@ -149,7 +149,7 @@
       </option>
       {% endfor %}
     </select>
-    -->
+     -->
 <!------------------------------------------->
 <!------------------------------------------->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -168,6 +168,7 @@
                     見る
                   </button>
                 </a>
+                <!--　いいね数の表示場所　-->
                 <div style="color: red; margin-left: 9px; margin-top: 3px">
                   ❤️ {{item.good}}
                 </div>
