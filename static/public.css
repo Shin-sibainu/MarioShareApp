@@ -1,0 +1,48 @@
+main {
+  background:url("../media/public_thumbnail.png");
+  background-size:contain; 
+  background-color:rgba(41, 33, 33, 0.794);
+  background-blend-mode: overlay;
+}
+
+h1 {
+  color:gainsboro;
+  display        : inline-block;
+  font-size      : 36pt;               /* 文字のサイズ */
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  letter-spacing : 4px;                /* 文字間 */
+  text-shadow    : 
+  2px  2px 1px #003366,
+ -2px  2px 1px #003366,
+  2px -2px 1px #003366,
+ -2px -2px 1px #003366,
+  2px  0px 1px #003366,
+  0px  2px 1px #003366,
+ -2px  0px 1px #003366,
+  0px -2px 1px #003366;        /* 文字の影 */
+}
+
+.leadtext {
+  color:gainsboro;
+  display        : inline-block;
+  font-size      : 14pt;               /* 文字のサイズ */
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  letter-spacing : 3px;                /* 文字間 */
+  text-shadow    : 
+  2px  2px 1px #003366,
+ -2px  2px 1px #003366,
+  2px -2px 1px #003366,
+ -2px -2px 1px #003366,
+  2px  0px 1px #003366,
+  0px  2px 1px #003366,
+ -2px  0px 1px #003366,
+  0px -2px 1px #003366;        /* 文字の影 */
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  background-size:contain; 
+  background-color:rgba(41, 33, 33, 0.794);
+  background-blend-mode: overlay;
+}
