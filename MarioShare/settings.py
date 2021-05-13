@@ -110,7 +110,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_DIRS = [str(BASE_DIR / 'static')]
+# 開発環境で調べたいならここは必要。
+# STATICFILES_DIRS = [str(BASE_DIR / 'static')]
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = 'media/'
