@@ -65,6 +65,7 @@ def mypagefunc(request, user_name):
     object_list = MarioShareModel.objects.all().order_by("-post_date")
     paginator = Paginator(object_list, 6)
     page_number = request.GET.get('page')
+    print(page_number)
     page_obj = paginator.get_page(page_number)
     context = {
         'object_list': object_list,

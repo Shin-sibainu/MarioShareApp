@@ -3,7 +3,7 @@
 {% block content %}
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">MarioShare</a>
+    <a class="navbar-brand" href="{% url 'public' %}"><img src="../../media/mario_logo.png" width="25px" height="25px">&nbsp;MarioShare</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -76,6 +76,16 @@
       <div class="md-form">
         <label for="id_coursevideo"><font color="black">Course Video</font></label>
         <input type="link" name="coursevideo" value="{{object.coursevideo}}" maxlength="100" required id="id_coursevideo" class="form-control">
+      </div>
+
+      <div class="md-form">
+        <label for="form103"><font color="black">Course Category</font></label>
+        <select type="text" name="coursecategory" id="form105" class="md-textarea form-control">
+        <option value="" selected>------------</option>
+        {% for item in category_list %}
+        <option value="{{item.pk}}" name="coursecategory">{{item.name}}</option>
+        {% endfor %}
+      </select>
       </div>
 
       <div class="md-form">

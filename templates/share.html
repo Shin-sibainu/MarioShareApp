@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+<link href="{% static 'share.css' %}" rel="stylesheet" />
+{% endblock customcss %} 
 
 {% block content %}
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">MarioShare</a>
+    <a class="navbar-brand" href="{% url 'public' %}"><img src="../media/mario_logo.png" width="25px" height="25px">&nbsp;MarioShare</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -70,7 +75,7 @@
       </div>
 
       <div class="md-form">
-        <label for="form103"><font color="black">Course Image</font></label>
+        <label for="form103"><font color="black">Course Image:(※任意)(アスペクト比=16:9)</font></label>
         <input type="file" id="form103" class="form-control" name="courseimage">
       </div>
 
@@ -104,10 +109,22 @@
 </section>
 </form>
 {% else %}
-<p>please login</p>
-<a href="{% url 'login' %}">ログインする</a>
+<container>
+  <container>
+      <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+        <div class="text-center">
+        <h3 class="white-text mb-5 mt-4">
+            <font color="black"
+              >You are not loggin. Please login.</font
+            >
+        </h3>
+        <a href="{% url 'login' %}" class="login-btn">ログインする</a>
+      </div>
+    </div>
 {% endif %}
 {% endblock content %}
+
+
 {% block footer %}
 <!-- Footer -->
 <footer class="bg-dark text-center text-white">

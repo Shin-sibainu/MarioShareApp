@@ -1,6 +1,12 @@
-{% extends 'base.html' %} {% load static %} {% block customcss %}
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block customcss %}
 <link href="{% static 'mypage.css' %}" rel="stylesheet" />
-{% endblock customcss %} {% block content %} {% if user.is_authenticated %}
+{% endblock customcss %} 
+
+{% block content %} 
+{% if user.is_authenticated %}
 <header>
   <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
@@ -45,7 +51,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">MarioShare</a>
+    <a class="navbar-brand" href="{% url 'public' %}"><img src="../../media/mario_logo.png" width="25px" height="25px">&nbsp;MarioShare</a>
     <button
       class="navbar-toggler"
       type="button"

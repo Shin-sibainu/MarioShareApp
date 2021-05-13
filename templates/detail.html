@@ -9,7 +9,7 @@
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">MarioShare</a>
+      <a class="navbar-brand" href="{% url 'public' %}"><img src="../../media/mario_logo.png" width="25px" height="25px">&nbsp;MarioShare</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -29,11 +29,13 @@
               >ホーム</a
             >
           </li>
+          {% if user.is_authenticated %}
           <li class="nav-item active">
             <a class="nav-link" aria-current="page" href="{% url 'mypage' user.pk%}"
               >マイページ</a
             >
           </li>
+          {% endif %}
           <li class="nav-item active">
             <a
               class="nav-link"
@@ -55,10 +57,12 @@
   <main class="container">
     <div class="starter-template text-center mb-4">
       <h1>Title: {{object.coursetitle}}</h1>
-      <p class="lead">Maker: {{object.coursemaker}}</p>
+      <p class="lead mb-2">Maker: {{object.coursemaker}}</p>
       <p class="lead"><strong>ID: {{object.courseid}}</strong></p>
+      <div class="video-container mb-3">
       {% video object.coursevideo as video %}
       {% video video '768x432' %}
+      </div>
       {% endvideo %}
       <!-- Or embed shortcut: -->
       <p>{{object.comment}}</p>
