@@ -1,19 +1,18 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import signupfunc, loginfunc, logoutfunc, publicfunc, landingfunc, mypagefunc, shareview, postdeleteview, detailfunc, updateview
-from .views import category, mypagecategory, sortfunc, goodfunc#, likebutton, likepage
+from .views import signupfunc, loginfunc, logoutfunc, publicfunc, mypagefunc, shareview, postdeleteview, detailfunc, updateview
+from .views import category, mypagecategory, sortfunc, goodfunc, toppagefunc
 
 #app_name = 'marioshareapp'
 
 urlpatterns = [
   # 指定したviewにrequestオブジェクト渡している。
-  path('landing/', landingfunc, name='landing'),
+  path('', toppagefunc, name='toppage'),
   path('signup/', signupfunc, name='signup'),
   path('login/', loginfunc, name='login'),
   path('logout/', logoutfunc, name='logout'),
   path('public/', publicfunc, name='public'),
   path('share/', shareview.as_view(), name='share'),
-  #path('share/', share_category, name='share'),
   path('public/category/<str:category>', category, name='category'),
   path('public/sort=<str:sort>', sortfunc, name='sort'),
   path('mypage/<str:user_name>/', mypagefunc, name='mypage'),

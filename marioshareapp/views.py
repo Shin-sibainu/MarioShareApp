@@ -9,13 +9,10 @@ from .models import MarioShareModel, CourseCategory
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 
-
-def landingfunc(request):
-    return render(request, 'landing.html', {})
+def toppagefunc(request):
+    return render(request, 'toppage.html', {})
 
 # サインアップ機能を実装
-
-
 def signupfunc(request):
     if(request.method == 'POST'):
         username = request.POST['username']
