@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import signupfunc, loginfunc, logoutfunc, publicfunc, mypagefunc, shareview, postdeleteview, detailfunc, updateview
-from .views import category, mypagecategory, sortfunc, goodfunc, toppagefunc
+from .views import otherpage, signupfunc, loginfunc, logoutfunc, publicfunc, mypagefunc, shareview, postdeleteview, detailfunc, updateview
+from .views import category, mypagecategory, sortfunc, goodfunc, toppagefunc, otherpage
 
 #app_name = 'marioshareapp'
 
@@ -17,6 +17,7 @@ urlpatterns = [
   path('public/sort=<str:sort>', sortfunc, name='sort'),
   path('mypage/<str:user_name>/', mypagefunc, name='mypage'),
   path('mypage/<str:user_name>/category/<str:category>', mypagecategory, name='mypagecategory'),
+  path('other/<str:user_name>', otherpage, name='otherpage'),
   path('update/<int:pk>', updateview.as_view(), name='update'),
   path('detail/<int:pk>', detailfunc, name='detail'),
   path('delete/<int:pk>', postdeleteview.as_view(), name='delete'),

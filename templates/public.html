@@ -62,7 +62,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item active">
           <a class="nav-link" aria-current="page" href="{% url 'toppage' %}"
-            >トップページ</a
+            >Top</a
           >
         </li>
         {% if user.is_authenticated %}
@@ -71,25 +71,25 @@
             class="nav-link"
             aria-current="page"
             href="{% url 'mypage' user.get_username %}"
-            >マイページ</a
+            >Mypage</a
           >
         </li>
         {% endif %}
         <li class="nav-item active">
           <a class="nav-link" aria-current="page" href="{% url 'share' %}"
-            >コース共有</a
+            >Share Course</a
           >
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item active">
           <a class="nav-link" aria-current="page" href="{% url 'logout'%}"
-            >ログアウト</a
+            >Logout</a
           >
         </li>
         {% else %}
         <li class="nav-item active">
           <a class="nav-link" aria-current="page" href="{% url 'login'%}"
-            >ログイン</a
+            >Login</a
           >
         </li>
         {% endif %}
@@ -106,17 +106,17 @@
 <main>
   <section class="text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
+      <div class="col-lg-5 col-md-8 mx-auto">
         <h1 class="fw-light">MarioShare</h1>
         <p class="lead text-muted">
           <span class="leadtext"
-            >アッと驚くクリエイティブなコース共有サイト</span
+            >Sharing mariomaker2 course</span
           >
         </p>
         {% if user.is_authenticated %}
         <p>
           <a href="{% url 'mypage' user.get_username %}" class="btn btn-primary my-2"
-            >マイページへ</a
+            >Mypage</a
           >
         </p>
         {% endif %}
@@ -179,12 +179,12 @@
               <div class="btn-group">
                 <a href="{% url 'detail' item.pk %}" class="card__link">
                   <button type="button" class="btn btn-sm btn-outline-primary">
-                    見る
+                    watch
                   </button>
                 </a>
                 <!--　いいね数の表示場所　-->
                 <div style="color: red; margin-left: 9px; margin-top: 3px">
-                  ❤️ {{item.good}}
+                  <i class="fas fa-heart"></i> {{item.good}}
                 </div>
               </div>
               ID: {{item.courseid}}

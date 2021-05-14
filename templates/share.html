@@ -25,7 +25,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item active">
           <a class="nav-link" aria-current="page" href="{% url 'public' %}"
-            >ホーム</a
+            >Home</a
           >
         </li>
         <li class="nav-item active">
@@ -33,12 +33,12 @@
             class="nav-link"
             aria-current="page"
             href="{% url 'mypage' user.pk %}"
-            >マイページ</a
+            >Mypage</a
           >
         </li>
         <li class="nav-item active">
           <a class="nav-link" aria-current="page" href="{% url 'logout'%}"
-            >ログアウト</a
+            >Logout</a
           >
         </li>
       </ul>
@@ -59,33 +59,33 @@
       </div>
 
       <div class="md-form">
-        <label for="form100"><font color="black">Course Title</font></label>
+        <label for="form100"><font color="black">Course Title(コースタイトル)</font></label>
         <input type="text" id="form100" class="form-control" name="coursetitle">
         
       </div>
 
       <div class="md-form">
-        <label for="form101"><font color="black">Course Maker</font></label>
+        <label for="form101"><font color="black">Course Maker（コース製作者）</font></label>
         <input type="text" id="form101" class="form-control" name="coursemaker">
       </div>
 
       <div class="md-form">
-        <label for="form102"><font color="black">Course ID</font></label>
+        <label for="form102"><font color="black">Course ID（コースID）</font></label>
         <input type="text" id="form102" class="form-control" name="courseid">
       </div>
 
       <div class="md-form">
-        <label for="form103"><font color="black">Course Image:(※任意)(アスペクト比=16:9)</font></label>
+        <label for="form103"><font color="black">Course Image:(※サムネイル任意)(※aspect ratio=16:9)</font></label>
         <input type="file" id="form103" class="form-control" name="courseimage">
       </div>
 
       <div class="md-form">
-        <label for="form103"><font color="black">Course Video</font></label>
+        <label for="form103"><font color="black">Course VideoURL（コースの動画のYoutubeURL)</font></label>
         <input type="link" id="form104" class="md-textarea form-control" rows="5" name="coursevideo">
       </div>
 
       <div class="md-form">
-        <label for="form103"><font color="black">Course Category</font></label>
+        <label for="form103"><font color="black">Course Category（コースカテゴリー）</font></label>
         <select type="text" name="coursecategory" id="form105" class="md-textarea form-control">
         <option value="" selected>------------</option>
         {% for item in category_list %}
@@ -95,7 +95,7 @@
       </div>
 
       <div class="md-form">
-        <label for="form103"><font color="black">Description</font></label>
+        <label for="form103"><font color="black">Description（コメント）</font></label>
         <textarea id="form106" class="md-textarea form-control" rows="5" name="comment"></textarea>
       </div>
       <input type="hidden" name="contributer" value="{{ user.username }}">
@@ -118,7 +118,7 @@
               >You are not loggin. Please login.</font
             >
         </h3>
-        <a href="{% url 'login' %}" class="login-btn">ログインする</a>
+        <a href="{% url 'login' %}" class="login-btn">Login</a>
       </div>
     </div>
 {% endif %}

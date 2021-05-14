@@ -68,29 +68,29 @@
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item active">
           <a class="nav-link" aria-current="page" href="{% url 'public' %}"
-            >ホーム</a
+            >Home</a
           >
         </li>
         <li class="nav-item active">
           <a
             class="nav-link"
             aria-current="page"
-            href="{% url 'mypage' user.pk %}"
-            >マイページ</a
+            href="{% url 'mypage' user.get_username %}"
+            >Mypage</a
           >
         </li>
         <li class="nav-item active">
           <a class="nav-link" aria-current="page" href="{% url 'share' %}"
-            >コース共有</a
+            >Share Course</a
           >
         </li>
         <li class="nav-item active">
           <a class="nav-link" aria-current="page" href="{% url 'logout'%}"
-            >ログアウト</a
+            >Logout</a
           >
         </li>
       </ul>
-      <a class="nav-link" aria-current="page" href="{% url 'mypage' user.pk %}"
+      <a class="nav-link" aria-current="page" href="{% url 'mypage' user.get_username %}"
         >{{ user.get_username }}</a
       >
     </div>
@@ -103,14 +103,14 @@
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">MyPage</h1>
         <p class="lead text-muted">
-          <span class="leadtext">とっておきの素晴らしいコースを共有しよう</span>
+          <span class="leadtext">Let's share amazing course!</span>
         </p>
         <p>
           <a href="{% url 'public' %}" class="btn btn-primary my-2"
-            >ホームに戻る</a
+            >Home</a
           >
           <a href="{% url 'share' %}" class="btn btn-secondary my-2"
-            >コースを共有</a
+            >Share Course</a
           >
         </p>
       </div>
@@ -152,29 +152,29 @@
               <div class="btn-group">
                 <a href="{% url 'detail' item.pk %}" class="card__link">
                   <button type="button" class="btn btn-sm btn-outline-primary">
-                    見る
+                    watch
                   </button>
                 </a>
                 <a href="{% url 'update' item.pk %}" class="card__link">
                   <button type="button" class="btn btn-sm btn-outline-success">
-                    編集
+                    edit
                   </button>
                 </a>
                 <a href="{% url 'delete' item.pk %}" class="card__link">
                   <button type="button" class="btn btn-sm btn-outline-danger">
-                    削除
+                    delete
                   </button>
                 </a>
                 <div style="color: red; margin-left: 9px; margin-top: 3px">
-                  ❤️ {{item.good}}
+                  <i class="fas fa-heart"></i> {{item.good}}
                 </div>
               </div>
               ID: {{item.courseid}}
             </div>
           </div>
         </div>
-      </div>
-      {% endif %} 
+      </div> 
+      {% endif %}      
       {% endfor %}
     </div>
 
@@ -208,7 +208,7 @@
 </div>
 {% else %}
 <p>please login</p>
-<a href="{% url 'login' %}">ログインする</a>
+<a href="{% url 'login' %}">Login</a>
 {% endif %} {% endblock content %} {% block footer %}
 <!-- Footer -->
 <footer class="bg-dark text-center text-white">

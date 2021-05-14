@@ -25,7 +25,12 @@
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item active">
           <a class="nav-link" aria-current="page" href="{% url 'public' %}"
-            >ホーム</a
+            >Home</a
+          >
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{% url 'signup' %}"
+            >Sign in</a
           >
         </li>
       </ul>  
@@ -37,7 +42,7 @@
     <main class="form-signin">
       {{error}}
       <form  method="POST">{% csrf_token %}
-        <h1 class="h3 mb-3 fw-normal">ログインする</h1>
+        <h1 class="h3 mb-3 fw-normal">Please Login</h1>
         <label for="inputEmail" class="visually-hidden">ユーザー名</label>
         <input
           type="text"
@@ -58,10 +63,10 @@
           required
         />
         <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">
-          ログイン
+          Login
         </button>
-          <p><a href="{% url 'signup' %}">初めてご利用の方はこちらでサインイン</a></p>
-          <a href="{% url 'public' %}">ログインせずサイトを見る</a>
+          <p><a href="{% url 'signup' %}">If you are a first-time user, sign in here</a></p>
+          <a href="{% url 'public' %}">Watch site without login.</a>
       </form>
     </main>
   </body>

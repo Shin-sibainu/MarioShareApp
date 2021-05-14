@@ -26,13 +26,13 @@
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item active">
             <a class="nav-link" aria-current="page" href="{% url 'public' %}"
-              >ホーム</a
+              >Home</a
             >
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item active">
-            <a class="nav-link" aria-current="page" href="{% url 'mypage' user.pk%}"
-              >マイページ</a
+            <a class="nav-link" aria-current="page" href="{% url 'mypage' user.get_username %}"
+              >Mypage</a
             >
           </li>
           {% endif %}
@@ -41,12 +41,12 @@
               class="nav-link"
               aria-current="page"
               href="{% url 'share' %}"
-              >コース共有</a
+              >Share Course</a
             >
           </li>
           <li class="nav-item active">
             <a class="nav-link" aria-current="page" href="{% url 'logout' %}"
-              >ログアウト</a
+              >Logout</a
             >
           </li>
         </ul>
@@ -56,8 +56,8 @@
 
   <main class="container">
     <div class="starter-template text-center mb-4">
-      <h1>Title: {{object.coursetitle}}</h1>
-      <p class="lead mb-2">Maker: {{object.coursemaker}}</p>
+      <h1>{{object.coursetitle}}</h1>
+      <p class="lead mb-2">Made by : {{object.coursemaker}}</p>
       <p class="lead"><strong>ID: {{object.courseid}}</strong></p>
       <div class="video-container mb-3">
       {% video object.coursevideo as video %}
@@ -67,14 +67,15 @@
       <!-- Or embed shortcut: -->
       <p>{{object.comment}}</p>
       <p>Category: {{object.coursecategory}}</p>
+      <p>Poster: <a href="{% url 'otherpage' object.contributer %}">{{object.contributer}}</a></p>
       <a
         href="{% url 'good' object.pk %}"
         type="button"
         class="btn btn-outline-danger"
-        >いいねする</a
-      >
+        >Good <i class="fas fa-heart"></i></a>
       <a href="#" type="button" class="btn btn-outline-info">
-        Twitterでシェア
+        Share on Twitter <i class="fab fa-twitter"></i
+          >
       </a>
     </div>
 

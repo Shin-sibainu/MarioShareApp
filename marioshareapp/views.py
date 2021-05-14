@@ -59,16 +59,35 @@ def publicfunc(request):
     return render(request, 'public.html', context)
 
 def mypagefunc(request, user_name):
+    user_list = User.objects.all()
+    for user in user_list:
+        print(user.username)
     object_list = MarioShareModel.objects.all().order_by("-post_date")
     paginator = Paginator(object_list, 6)
     page_number = request.GET.get('page')
     print(page_number)
     page_obj = paginator.get_page(page_number)
     context = {
+        'user_list': user_list,
         'object_list': object_list,
         'page_obj': page_obj,
     }
     return render(request, 'mypage.html', context)
+
+def otherpage(request, user_name):
+    print(user_name)
+    #user_list = User.objects.all()
+    object_list = MarioShareModel.objects.all().order_by("-post_date")
+    paginator = Paginator(object_list, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        #'user_list': user_list,
+        'page_obj': page_obj,
+        'user_name': user_name,
+    }
+    return render(request, 'otherpage.html', context)
 
 def mypagecategory(request, user_name, category):
     the_object_list = MarioShareModel.objects.all()
