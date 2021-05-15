@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'marioshareapp',
     'embed_video',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [

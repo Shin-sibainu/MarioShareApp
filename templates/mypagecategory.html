@@ -141,7 +141,7 @@
             <img src="{{the_object.courseimage.url}}" width="384" height="216" />
           </center>
           <div class="card-body">
-            <p class="card-text">{{the_object.coursetitle}}</p>
+            <p class="card-text">{{the_object.coursetitle}} by {{item.coursemaker}}</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
                 <a href="{% url 'detail' the_object.pk %}" class="card__link">

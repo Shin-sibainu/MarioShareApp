@@ -112,3 +112,8 @@ h1 {
   background-blend-mode: overlay;
 }
 
+.thumbnail_img {
+  width:100%;
+  max-width: 100%;
+  height: auto;
+  }

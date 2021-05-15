@@ -50,7 +50,6 @@ def publicfunc(request):
     # 逆順で取得したデータを6つまで取得。
     paginator = Paginator(object_list, 6)
     page_number = request.GET.get('page')
-    print(page_number)
     page_obj = paginator.get_page(page_number)
 
     context = {
@@ -60,12 +59,9 @@ def publicfunc(request):
 
 def mypagefunc(request, user_name):
     user_list = User.objects.all()
-    for user in user_list:
-        print(user.username)
     object_list = MarioShareModel.objects.all().order_by("-post_date")
     paginator = Paginator(object_list, 6)
     page_number = request.GET.get('page')
-    print(page_number)
     page_obj = paginator.get_page(page_number)
     context = {
         'user_list': user_list,
@@ -75,7 +71,6 @@ def mypagefunc(request, user_name):
     return render(request, 'mypage.html', context)
 
 def otherpage(request, user_name):
-    print(user_name)
     #user_list = User.objects.all()
     object_list = MarioShareModel.objects.all().order_by("-post_date")
     paginator = Paginator(object_list, 6)
@@ -125,6 +120,16 @@ class updateview(UpdateView):
     def get_success_url(self):
         return reverse('public')
 
+    #def form_valid(self, form):
+        post_pk = self.kwargs['pk']
+        comment = form.save(commit=False)
+        #comment.post = get_object_or_404(UploadModel, pk=post_pk)
+        if not comment.attach:
+           comment.attach = get_object_or_404(MarioShareModel, pk=post_pk).attach
+        comment.save()
+        return redirect('public', pk=post_pk)
+
+
 def category(request, category):
     the_object_list = MarioShareModel.objects.all()
     # print(the_object_list)
@@ -138,7 +143,6 @@ def sortfunc(request, sort):
     # goodが多い順にデータをとってきたい。
     good_sort_list = MarioShareModel.objects.all().order_by("-good")
     new_sort_list = MarioShareModel.objects.all().order_by("-post_date")
-    print(sort)
     context ={
         'good_sort_list':good_sort_list,
         'new_sort_list':new_sort_list,
