@@ -1,4 +1,7 @@
 from pathlib import Path
+import os
+import dj_database_url #追加
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,10 +11,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kb&$1c(cu*8(67(fu5168w5lihgnzvq)srl_6)4o-hzm8)m5vo'
+SERECT_KEY = 'PBqvJSws8A49cHfCJiU1GDw8h1cW1z6JChGzTpA6'
+# SECRET_KEY = 'django-insecure-kb&$1c(cu*8(67(fu5168w5lihgnzvq)srl_6)4o-hzm8)m5vo'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# 開発環境ならTrue
+# DEBUG = True
+# 本番ならFalse
+DEBUG = False 
 
 ALLOWED_HOSTS = ['marioshareapp.herokuapp.com', '127.0.0.1']
 
@@ -28,7 +36,21 @@ INSTALLED_APPS = [
     'marioshareapp',
     'embed_video',
     'django_cleanup.apps.CleanupConfig',
+    'storages'
 ]
+
+
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = S3_URL
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -117,6 +139,25 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = 'media/'
+
+if not DEBUG:
+    SECRET_KEY = os.environ['SECRET_KEY']
+
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+    MEDIA_URL = S3_URL
+
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = None
+
+    django_heroku.settings(locals())
+
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'].update(db_from_env)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
