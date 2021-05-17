@@ -102,9 +102,11 @@ WSGI_APPLICATION = 'MarioShare.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'private_diary',
+        'NAME': 'marioshareapp',
+        'USERNAME':'Juvenile',
+        'PASSWORD':'MarioShareapp',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '',
     }
 }
 
