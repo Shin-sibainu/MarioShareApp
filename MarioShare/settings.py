@@ -110,7 +110,7 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['djangojp.herokuapp.com', '127.0.0.1'] 
 #else:
     # 本番環境
     # DEBUG = False
