@@ -105,7 +105,7 @@ DATABASES = {
         'NAME': 'marioshareapp',
         'USERNAME':'Juvenile',
         'PASSWORD':'MarioShareapp',
-        'HOST': 'localhost',
+        'HOST': '',
         'PORT': '',
     }
 }
