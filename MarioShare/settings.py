@@ -105,7 +105,7 @@ DATABASES = {
         'NAME': 'marioshareapp_db',
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
