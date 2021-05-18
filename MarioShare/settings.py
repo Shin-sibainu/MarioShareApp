@@ -1,5 +1,5 @@
 from pathlib import Path
-# import os
+import os
 # import dj_database_url #追加
 # from socket import gethostname
 # import django_heroku
@@ -102,9 +102,9 @@ WSGI_APPLICATION = 'MarioShare.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'marioshareapp',
-        'USERNAME':'Juvenile',
-        'PASSWORD':'MarioShareapp',
+        'NAME': 'marioshareapp_db',
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
         'HOST': '',
         'PORT': '',
     }
