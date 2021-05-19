@@ -21,10 +21,9 @@ SECRET_KEY = 'django-insecure-kb&$1c(cu*8(67(fu5168w5lihgnzvq)srl_6)4o-hzm8)m5vo
 # 開発環境ならTrue
 # DEBUG = True
 # 本番ならFalse
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['marioshareapp.herokuapp.com', '127.0.0.1']
-
 
 # Application definition
 
@@ -120,7 +119,7 @@ DATABASES = {
 
 
 
-ALLOWED_HOSTS = ['127.0.0.1', 'marioshareapp.herokuapp.com'] 
+# ALLOWED_HOSTS = ['127.0.0.1', 'marioshareapp.herokuapp.com'] 
 #else:
     # 本番環境
     # DEBUG = False
@@ -173,8 +172,9 @@ STATIC_ROOT = BASE_DIR / 'static'
 # 開発環境で調べたいならここは必要。
 # STATICFILES_DIRS = [str(BASE_DIR / 'static')]
 
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_URL = 'media/'
+
 
 #if not DEBUG:
 #    SECRET_KEY = os.environ['SECRET_KEY']
