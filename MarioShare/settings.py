@@ -21,7 +21,7 @@ SECRET_KEY = 'django-insecure-kb&$1c(cu*8(67(fu5168w5lihgnzvq)srl_6)4o-hzm8)m5vo
 # 開発環境ならTrue
 # DEBUG = True
 # 本番ならFalse
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['marioshareapp.herokuapp.com', '127.0.0.1']
 
