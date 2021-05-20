@@ -41,16 +41,7 @@ INSTALLED_APPS = [
 ]
 
 # os.environ['AWS_ACCESS_KEY_ID']
-AWS_ACCESS_KEY_ID = 'AKIA5RR4KKVOENG6Y5HF'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'marioshareapp'
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-MEDIA_URL = S3_URL
-
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
 
 
 MIDDLEWARE = [
@@ -88,16 +79,6 @@ WSGI_APPLICATION = 'MarioShare.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#if "COMPUTER-NAME" in hostname:
-    # デバッグ環境
-    # DEBUG = True 
-#DATABASES = {
-#      'default': {
-#           'ENGINE': 'django.db.backends.sqlite3',
-#           'NAME': 'db.sqlite3',
-#       }
-#   }
-
 
 #DATABASES = {
 #    'default': {
@@ -116,19 +97,6 @@ DATABASES = {
     'PORT': 5432,
   }
 }
-
-
-
-# ALLOWED_HOSTS = ['127.0.0.1', 'marioshareapp.herokuapp.com'] 
-#else:
-    # 本番環境
-    # DEBUG = False
- #   db_from_env = dj_database_url.config()
- #   DATABASES = {
- #       'default': dj_database_url.config()
- #   }
- #   ALLOWED_HOSTS = ['*']
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -176,13 +144,27 @@ STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+if DEBUG:
+   AWS_ACCESS_KEY_ID = 'AKIA5RR4KKVOENG6Y5HF'
+   AWS_SECRET_ACCESS_KEY = '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'
+   AWS_STORAGE_BUCKET_NAME = 'marioshareapp'
+
+   DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+   S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+   MEDIA_URL = S3_URL
+
+   AWS_S3_FILE_OVERWRITE = False
+   AWS_DEFAULT_ACL = None
 
 if not DEBUG:
-    SECRET_KEY = os.environ['SECRET_KEY']
-
-    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    #SECRET_KEY = os.environ['SECRET_KEY']
+    #AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    #AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    #AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    SECRET_KEY = 'PBqvJSws8A49cHfCJiU1GDw8h1cW1z6JChGzTpA6'
+    AWS_ACCESS_KEY_ID = 'AKIA5RR4KKVOENG6Y5HF'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = 'marioshareapp'
 
     #STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
