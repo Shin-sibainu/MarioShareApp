@@ -1,8 +1,8 @@
 from pathlib import Path
 import os
-# import dj_database_url #追加
+import dj_database_url #追加
 # from socket import gethostname
-# import django_heroku
+import django_heroku
 # hostname = gethostname()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,20 +37,20 @@ INSTALLED_APPS = [
     'marioshareapp',
     'embed_video',
     #'django_cleanup.apps.CleanupConfig',
-    #'storages'
+    'storages'
 ]
 
+# os.environ['AWS_ACCESS_KEY_ID']
+AWS_ACCESS_KEY_ID = 'AKIA5RR4KKVOENG6Y5HF'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'marioshareapp'
 
-#AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-#AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-#AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = S3_URL
 
-#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-#S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-#MEDIA_URL = S3_URL
-
-#AWS_S3_FILE_OVERWRITE = False
-#AWS_DEFAULT_ACL = None
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
 
 
 MIDDLEWARE = [
@@ -169,6 +169,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # 本番環境ならこっちが必要？
 STATIC_ROOT = BASE_DIR / 'static'
+#STATICFILES_STORAGE = 'storages.backends.s3boto'
 # 開発環境で調べたいならここは必要。
 # STATICFILES_DIRS = [str(BASE_DIR / 'static')]
 
@@ -176,24 +177,25 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-#if not DEBUG:
-#    SECRET_KEY = os.environ['SECRET_KEY']
+if not DEBUG:
+    SECRET_KEY = os.environ['SECRET_KEY']
 
-#    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-#    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-#    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 
-#    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-#    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-#    MEDIA_URL = S3_URL
+    #STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+    MEDIA_URL = S3_URL
 
-#    AWS_S3_FILE_OVERWRITE = False
-#    AWS_DEFAULT_ACL = None
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = None
 
-#    django_heroku.settings(locals())
+    django_heroku.settings(locals())
 
-#db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-#DATABASES['default'].update(db_from_env)
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'].update(db_from_env)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
