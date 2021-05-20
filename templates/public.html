@@ -1,6 +1,12 @@
-{% extends 'base.html' %} {% load static %} {% block customcss %}
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block customcss %}
 <link href="{% static 'public.css' %}" rel="stylesheet" />
-{% endblock customcss %} {% block content %}
+{% endblock customcss %} 
+
+{% block content %}
 <header>
   <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
@@ -206,14 +212,16 @@
           aria-disabled="true"
           >&laquo; previous</a
         >
-        {% endif %} {% for page_number in page_obj.page_number %}
+        {% endif %} 
+        {% for page_number in page_obj.page_number %}
         <p>a</p>
         <li class="page-item">
           <a class="page-link" href="{{page_object.number}}"
             >{{page_number.number}}</a
           >
         </li>
-        {% endfor %} {% if page_obj.has_next %}
+        {% endfor %} 
+        {% if page_obj.has_next %}
         <!--<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>-->
         <a class="page-link" href="?page={{ page_obj.next_page_number }}"
           >Next &raquo;</a
